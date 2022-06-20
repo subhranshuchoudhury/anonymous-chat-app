@@ -29,7 +29,7 @@
     
     <script>
         const msgList = document.getElementById("messagesList");
-        console.log(msgList)
+        let oldArrayLength = 0;
         function loadData(){
     const URL = "/messages/"+"<%=roomName%>"+"/"+"<%=roomPassword%>";
 
@@ -47,16 +47,21 @@ const getPosts = async () => {
 
 getPosts()
     .then(mydata => {
-        mydata.slice().reverse().forEach(element=>{
+        if(oldArrayLength < mydata.length){
+            removeAllChildNodes(msgList);
+            mydata.slice().reverse().forEach(element=>{
             addmessageToList(element);
-        })
+        });
+        }else{
+            window.oldArrayLength = mydata.length;
+        }
+        
     })
     .catch(error => {
         alert(error);
 
     });}
     setInterval(() => {
-        removeAllChildNodes(msgList);
         loadData();
     }, 5000);
     
