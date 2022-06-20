@@ -244,6 +244,6 @@ app.get("/test/:roomName/:roomPassword",(req,res)=>{
     res.render("test",{roomName:roomName,roomPassword:roomPassword});
 })
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT || 3000,()=>{
     console.log("===> Live at port 3000")
 });
