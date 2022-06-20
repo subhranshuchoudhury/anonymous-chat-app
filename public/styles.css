@@ -27,17 +27,14 @@ body{
     border-radius: 50%;
 }
 
-a{
-    text-decoration: none;
-    font-weight: bolder;
-}
+
 
 button{
     margin: 30px;
 }
 
 h1{
-    color: blue;
+    color: rgb(147, 194, 255);
 }
 
 
