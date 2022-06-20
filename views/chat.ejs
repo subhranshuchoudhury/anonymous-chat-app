@@ -1,0 +1,80 @@
+<%- include('partials/header') %>
+
+
+<div class="container">
+  <div class="jumbotron centered">
+    <i class="fas fa-key fa-6x"></i>
+    <h1 class="display-3">Anonymous</h1>
+    <h4>Inbox</h4>
+    
+        <div id="messageContainer">
+            <p id="messagesList" class="displayMsg">
+            </p>
+        </div>
+
+        <form action="/chat/<%= roomName %>/<%= roomPassword %>  " method="POST">
+
+            <div class="form-group">
+              <input type="text" class="form-control text-center" name="message" placeholder="Enter your message..">
+            </div>
+            <center>
+            <button type="submit" class="btn btn-danger send">Send</button>
+
+            </center>
+          </form>
+    
+    
+    
+    
+    
+    <script>
+        const msgList = document.getElementById("messagesList");
+        console.log(msgList)
+        function loadData(){
+    const URL = "/messages/"+"<%=roomName%>"+"/"+"<%=roomPassword%>";
+
+
+const getPosts = async () => {
+
+    const response = await fetch(URL);
+    if (!response.ok) {
+        throw new Error("Error in fetching JSON data, Contact subhranshuchoudhury");
+    }
+    const data = await response.json(); // it will wait to resolve.
+    return data;
+
+}
+
+getPosts()
+    .then(mydata => {
+        mydata.slice().reverse().forEach(element=>{
+            addmessageToList(element);
+        })
+    })
+    .catch(error => {
+        alert(error);
+
+    });}
+    setInterval(() => {
+        removeAllChildNodes(msgList);
+        loadData();
+    }, 5000);
+    
+    loadData();
+
+    function addmessageToList(message) {
+        const msgNode = document.createElement("p");
+        msgNode.innerHTML = `|=> ${message}`;
+        msgList.appendChild(msgNode);
+    }
+
+    function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+    </script>
+
+
+
+<%- include('partials/footer') %>

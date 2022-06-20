@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>This is Test page.</h1>
+    
+        <div id="messageContainer">
+            <p id="messagesList" class="displayMsg">
+                <li>..</li>
+            </p>
+        </div>
+
+        <form action="/chat/<%= roomName %>/<%= roomPassword %>  " method="POST">
+
+            <div class="form-group">
+              <input type="text" class="form-control text-center" name="message" placeholder="Enter your message..">
+            </div>
+            <button type="submit" class="btn btn-dark">Send</button>
+          </form>
+    
+    
+    
+    
+    
+    <script>
+        const msgList = document.getElementById("messagesList");
+        console.log(msgList)
+        function loadData(){
+    const URL = "/messages/"+"<%=roomName%>"+"/"+"<%=roomPassword%>";
+const URL2 = "http://sigmarule.herokuapp.com/sigmarule/random";
+
+const getPosts = async () => {
+
+    const response = await fetch(URL);
+    if (!response.ok) {
+        throw new Error("Error in fetching JSON data, Contact subhranshuchoudhury");
+    }
+    const data = await response.json(); // it will wait to resolve.
+    return data;
+
+}
+
+getPosts()
+    .then(mydata => {
+        mydata.slice().reverse().forEach(element=>{
+            addmessageToList(element);
+        })
+    })
+    .catch(error => {
+        alert(error);
+
+    });}
+    setInterval(() => {
+        removeAllChildNodes(msgList);
+        loadData();
+    }, 3000);
+    
+    loadData();
+
+    function addmessageToList(message) {
+        const songList = document.createElement("p");
+        songList.innerHTML = `~> ${message}`;
+        msgList.appendChild(songList);
+    }
+
+    function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+    </script>
+</body>
+</html>

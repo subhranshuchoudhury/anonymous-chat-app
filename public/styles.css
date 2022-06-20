@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+#messageContainer{
+    background-color: black;
+    height: 400px;
+    overflow-y: scroll;
+    margin: 10px;
+}
+.displayMsg{
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    font-family: 'Ubuntu', Courier, monospace;
+    
+}
+
+
+
+body{
+    background-color: #131a1f;
+    font-family: 'Roboto Mono', Courier, monospace;
+}
+
+.home-logo{
+    display: block;
+    width: 25%;
+    margin: 50px auto;
+    border-radius: 50%;
+}
+
+a{
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+button{
+    margin: 30px;
+}
+
+h1{
+    color: blue;
+}
+
+
+
+.room-logo{
+    display: block;
+    width: 25%;
+    margin: 50px auto;
+    border-radius: 23px;
+}
+
+.submit-btn{
+    color: rgb(255, 255, 255);
+    width: 80%;
+    font-weight: bolder;
+    margin: 10px;
+}
+
+.send{
+    width: 70%;
+}
