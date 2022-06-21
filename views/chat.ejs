@@ -5,7 +5,7 @@
   <div class="jumbotron centered">
     <i class="fas fa-key fa-6x"></i>
     <h1 class="display-3"><%= roomName %> </h1>
-    <h4>Inbox</h4>
+    <h4>Anonymous</h4>
     
         <div id="messageContainer">
             <p id="messagesList" class="displayMsg">
@@ -18,7 +18,7 @@
               <input type="text" class="form-control text-center" name="message" placeholder="Enter your message..">
             </div>
             <center>
-            <button type="submit" class="btn btn-danger send">Send</button>
+            <button type="submit" class="btn btn-success send">Send</button>
 
             </center>
           </form>
@@ -65,7 +65,7 @@ getPosts()
 
     function addmessageToList(message) {
         const msgNode = document.createElement("p");
-        msgNode.innerHTML = `${message}`;
+        msgNode.innerHTML = `[*] ${message}`;
         msgList.appendChild(msgNode);
     }
 

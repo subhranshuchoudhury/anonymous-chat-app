@@ -7,10 +7,10 @@
     margin: 10px;
     border-radius: 23px;
     /* overflow-y: hidden; */
-    border: 5px solid salmon;
+    border: 5px solid rgb(0, 0, 0);
 }
 .displayMsg{
-    color: rgb(255, 255, 255);
+    color: rgb(66, 247, 11);
     padding: 10px;
     font-family: 'Ubuntu', Courier, monospace;
     
@@ -60,5 +60,6 @@ h3{
 }
 
 .send{
-    width: 70%;
+    display: table;
+    padding: 10px 70px;
 }
