@@ -8,7 +8,14 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const app = express();
 
+// For time-stamp in chat.
 
+function timestamp() {
+    let d = new Date();
+    let ISTTime = new Date(new Date().getTime() + (330 + d.getTimezoneOffset())*60000);
+    let timeStamp = `[${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][ISTTime.getDay()]} ${ISTTime.getHours() % 12 || 12}:${ISTTime.getMinutes()} ${ISTTime.getHours()>=12?"PM":"AM"}]`
+    return timeStamp;
+}
 
 
 app.use(express.static("public"));
@@ -144,7 +151,7 @@ app.post("/create-room",(req,res)=>{
         }
 
     });
-})
+});
 
 
 
@@ -174,7 +181,7 @@ app.post("/chat/:roomName/:roomPassword",(req,res)=>{
     if(req.isAuthenticated()){
         const message = req.body.message;
         const username = req.user.username;
-        Room.updateOne({roomname:req.params.roomName,password:req.params.roomPassword},{$push: { messages: `${username}: ${message}` }},(err)=>{
+        Room.updateOne({roomname:req.params.roomName,password:req.params.roomPassword},{$push: { messages: `${timestamp()} ${username}: ${message}` }},(err)=>{
            if(err){
                res.send(err);
            }else{
@@ -186,7 +193,7 @@ app.post("/chat/:roomName/:roomPassword",(req,res)=>{
     }
 
     
-})
+});
 
 app.get("/join-room",(req,res)=>{
     if(req.isAuthenticated()){
@@ -194,7 +201,7 @@ app.get("/join-room",(req,res)=>{
     }else{
         res.redirect("login");
     }
-})
+});
 
 app.post("/join-room",(req,res)=>{
     if(req.isAuthenticated()){
@@ -217,7 +224,7 @@ app.post("/join-room",(req,res)=>{
     }else{
         res.redirect("login");
     }
-})
+});
 
 app.get("/messages/:roomName/:roomPassword",(req,res)=>{
     const roomName = req.params.roomName;
@@ -237,12 +244,6 @@ app.get("/messages/:roomName/:roomPassword",(req,res)=>{
     });
 });
 
-app.get("/test/:roomName/:roomPassword",(req,res)=>{
-    const roomName = req.params.roomName;
-    const roomPassword = req.params.roomPassword;
-
-    res.render("test",{roomName:roomName,roomPassword:roomPassword});
-})
 
 app.listen(process.env.PORT || 3000,()=>{
     console.log("===> Live at port 3000")
