@@ -223,22 +223,18 @@ app.get("/messages/:roomName/:roomPassword",(req,res)=>{
     const roomName = req.params.roomName;
     const roomPassword = req.params.roomPassword;
     
-    if (req.isAuthenticated()) {
-        Room.findOne({roomname:roomName,password:roomPassword},(err,message)=>{
-            if(message){
-                res.send(message.messages);
-    
+    Room.findOne({roomname:roomName,password:roomPassword},(err,message)=>{
+        if(message){
+            res.send(message.messages);
+
+        }else{
+            if(err){
+                res.send(err);
             }else{
-                if(err){
-                    res.send(err);
-                }else{
-                    res.send("No room matched.");
-                }
+                res.send("No room matched.");
             }
-        });
-    }else{
-        res.send(`You are not Authorized, <a href="/login">Login</a> to be authorized.`);
-    }
+        }
+    });
 });
 
 app.get("/test/:roomName/:roomPassword",(req,res)=>{
