@@ -6,7 +6,7 @@
     overflow-y: scroll;
     margin: 10px;
     border-radius: 23px;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     border: 5px solid salmon;
 }
 .displayMsg{
