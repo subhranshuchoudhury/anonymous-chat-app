@@ -68,8 +68,7 @@ app.get("/register",(req,res)=>{
 app.get("/room",(req,res)=>{
     
     if(req.isAuthenticated()){
-        // console.log(req.user.username)   // apply it on the message section.
-        res.render("room");
+        res.render("room",{username:req.user.username});
     }else{
         res.redirect("/login");
     }

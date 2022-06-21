@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 #messageContainer{
-    background-color: black;
+    background-color: rgb(63, 59, 59);
     height: 400px;
     overflow-y: scroll;
     margin: 10px;
+    border-radius: 23px;
+    overflow-y: hidden;
+    border: 5px solid salmon;
 }
 .displayMsg{
     color: rgb(255, 255, 255);
@@ -37,7 +40,10 @@ h1{
     color: rgb(147, 194, 255);
 }
 
-
+h3{
+    color: antiquewhite;
+    text-align: center;
+}
 
 .room-logo{
     display: block;

@@ -4,7 +4,7 @@
 <div class="container">
   <div class="jumbotron centered">
     <i class="fas fa-key fa-6x"></i>
-    <h1 class="display-3">Anonymous</h1>
+    <h1 class="display-3"><%= roomName %> </h1>
     <h4>Inbox</h4>
     
         <div id="messageContainer">
@@ -22,23 +22,19 @@
 
             </center>
           </form>
-    
-    
-    
-    
-    
+
     <script>
         const msgList = document.getElementById("messagesList");
         let oldArrayLength = 0;
         function loadData(){
-    const URL = "/messages/"+"<%=roomName%>"+"/"+"<%=roomPassword%>";
+    const URL = "http://anonymousmsg.herokuapp.com/messages/"+"<%=roomName%>"+"/"+"<%=roomPassword%>";
 
 
 const getPosts = async () => {
 
     const response = await fetch(URL);
     if (!response.ok) {
-        throw new Error("Error in fetching JSON data, Contact subhranshuchoudhury");
+        console.log("error!");
     }
     const data = await response.json(); // it will wait to resolve.
     return data;
@@ -58,7 +54,7 @@ getPosts()
         
     })
     .catch(error => {
-        alert(error);
+        console.log("error.");
 
     });}
     setInterval(() => {
