@@ -12,10 +12,11 @@ const app = express();
 
 function timestamp() {
     let d = new Date();
-    let ISTTime = new Date(new Date().getTime() + (330 + d.getTimezoneOffset())*60000);
-    let timeStamp = `[${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][ISTTime.getDay()]} ${ISTTime.getHours() % 12 || 12}:${ISTTime.getMinutes()} ${ISTTime.getHours()>=12?"PM":"AM"}]`
+    let ISTTime = new Date(d.getTime() + (330 + d.getTimezoneOffset())*60000);
+    let timeStamp = `[${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][ISTTime.getDay()]} ${ISTTime.getHours() % 12 || 12}:${ISTTime.getMinutes()} ${ISTTime.getHours()>=12?"PM":"AM"} ${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} IST]`;
     return timeStamp;
 }
+
 
 
 app.use(express.static("public"));
@@ -181,7 +182,7 @@ app.post("/chat/:roomName/:roomPassword",(req,res)=>{
     if(req.isAuthenticated()){
         const message = req.body.message;
         const username = req.user.username;
-        Room.updateOne({roomname:req.params.roomName,password:req.params.roomPassword},{$push: { messages: `${timestamp()} ${username}: ${message}` }},(err)=>{
+        Room.updateOne({roomname:req.params.roomName,password:req.params.roomPassword},{$push: { messages: `${timestamp()}<br><b style="color:white;">${username}:  ${message}</b>` }},(err)=>{
            if(err){
                res.send(err);
            }else{
