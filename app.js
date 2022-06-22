@@ -167,7 +167,7 @@ app.get("/chat/:roomName/:roomPassword",(req,res)=>{
                 if(err){
                     res.send(err);
                 }else{
-                    res.send("/room");
+                    res.render("result",{message:"Room has been deleted or not found."});
                 }
             }
         });
