@@ -128,7 +128,7 @@ app.post("/login",(req,res)=>{
     
 });
 
-// ROOM ########################
+// ROOM 
 
 app.get("/create-room",(req,res)=>{
     if(req.isAuthenticated()){
@@ -216,7 +216,7 @@ app.post("/join-room",(req,res)=>{
                 if(err){
                     res.send(err);
                 }else{
-                    res.redirect("/join-room");
+                    res.render("result",{message:"Room Name or Room Password mismatched. Kindly Recheck."});
                 }
             }
         });
@@ -226,6 +226,23 @@ app.post("/join-room",(req,res)=>{
         res.redirect("login");
     }
 });
+
+app.get("/delete-room",(req,res)=>{
+    res.render("delete-room")
+});
+
+app.post("/delete-room",(req,res)=>{
+    const roomName = req.body.roomName;
+    const roomPassword = req.body.roomPassword;
+    
+    Room.deleteOne({roomname:roomName,password:roomPassword},(err)=>{
+        if (err) {
+            res.send(err);
+        } else {
+            res.render("result",{message:"Room has been deleted successfully."})
+        }
+    })
+})
 
 app.get("/messages/:roomName/:roomPassword",(req,res)=>{
     const roomName = req.params.roomName;
@@ -239,7 +256,7 @@ app.get("/messages/:roomName/:roomPassword",(req,res)=>{
             if(err){
                 res.send(err);
             }else{
-                res.send("No room matched.");
+                res.render("result",{message:"No room matched. Recheck Room Name & Room Password."});
             }
         }
     });

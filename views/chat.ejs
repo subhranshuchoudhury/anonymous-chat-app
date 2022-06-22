@@ -1,81 +1,85 @@
 <%- include('partials/header') %>
 
 
-<div class="container">
-  <div class="jumbotron centered">
-    <i class="fas fa-key fa-6x"></i>
-    <h1 class="display-3"><%= roomName %> </h1>
-    <h4>Anonymous</h4>
-    
-        <div id="messageContainer">
-            <p id="messagesList" class="displayMsg">
-            </p>
-        </div>
+    <div class="container">
+        <div class="jumbotron centered">
+            <i class="fas fa-key fa-6x"></i>
+            <h1 class="display-3">
+                <%= roomName %>
+            </h1>
+            <h4>Anonymous</h4>
 
-        <form action="/chat/<%= roomName %>/<%= roomPassword %>  " method="POST">
-
-            <div class="form-group">
-              <input type="text" class="form-control text-center" name="message" placeholder="Enter your message..">
+            <div id="messageContainer">
+                <p id="messagesList" class="displayMsg">
+                </p>
             </div>
-            <center>
-            <button type="submit" class="btn btn-success send">Send</button>
 
-            </center>
-          </form>
+            <form action="/chat/<%= roomName %>/<%= roomPassword %>  " method="POST">
 
-    <script>
-        const msgList = document.getElementById("messagesList");
-        let oldArrayLength = 0;
-        function loadData(){
-    const URL = "/messages/"+"<%=roomName%>"+"/"+"<%=roomPassword%>";
+                <div class="form-group">
+                    <input type="text" class="form-control text-center" name="message"
+                        placeholder="Enter your message..">
+                </div>
+                <center>
+                    <button type="submit" class="btn btn-success send">Send</button>
 
+                </center>
+            </form>
 
-const getPosts = async () => {
-
-    const response = await fetch(URL);
-    if (!response.ok) {
-        console.log("error!");
-    }
-    const data = await response.json(); // it will wait to resolve.
-    return data;
-
-}
-
-getPosts()
-    .then(mydata => {
-        if(oldArrayLength < mydata.length){
-            removeAllChildNodes(msgList);
-            mydata.slice().reverse().forEach(element=>{
-            addmessageToList(element);
-        });
-        }else{
-            window.oldArrayLength = mydata.length;
-        }
-        
-    })
-    .catch(error => {
-        console.log("error.");
-
-    });}
-    setInterval(() => {
-        loadData();
-    }, 5000);
-    
-    loadData();
-
-    function addmessageToList(message) {
-        const msgNode = document.createElement("p");
-        msgNode.innerHTML = `[*] ${message}`;
-        msgList.appendChild(msgNode);
-    }
-
-    function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
-    </script>
+            <script>
+                const msgList = document.getElementById("messagesList");
+                let oldArrayLength = 0;
+                function loadData() {
+                    const URL = "/messages/" + "<%=roomName%>" + "/" + "<%=roomPassword%>";
 
 
+                    const getPosts = async () => {
 
-<%- include('partials/footer') %>
+                        const response = await fetch(URL);
+                        if (!response.ok) {
+                            console.log("error!");
+                        }
+                        const data = await response.json(); // it will wait to resolve.
+                        return data;
+
+                    }
+
+                    getPosts()
+                        .then(mydata => {
+                            if (oldArrayLength < mydata.length) {
+                                removeAllChildNodes(msgList);
+                                mydata.slice().reverse().forEach(element => {
+                                    addmessageToList(element);
+                                });
+                            } else {
+                                window.oldArrayLength = mydata.length;
+                            }
+
+                        })
+                        .catch(error => {
+                            console.log("error.");
+
+                        });
+                }
+                setInterval(() => {
+                    loadData();
+                }, 5000);
+
+                loadData();
+
+                function addmessageToList(message) {
+                    const msgNode = document.createElement("p");
+                    msgNode.innerHTML = `[*] ${message}`;
+                    msgList.appendChild(msgNode);
+                }
+
+                function removeAllChildNodes(parent) {
+                    while (parent.firstChild) {
+                        parent.removeChild(parent.firstChild);
+                    }
+                }
+            </script>
+
+
+
+            <%- include('partials/footer') %>
