@@ -186,7 +186,7 @@ app.post("/chat/:roomName/:roomPassword",(req,res)=>{
            if(err){
                res.send(err);
            }else{
-            //    res.redirect(`/chat/${req.params.roomName}/${req.params.roomPassword}`);
+               res.redirect(`/chat/${req.params.roomName}/${req.params.roomPassword}`);
             
            }
        });
