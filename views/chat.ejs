@@ -14,20 +14,14 @@
                 <p id="loading">Messages are loading...</p>
                 </p>
             </div>
-
-            <form name="msgForm" action="/chat/<%= roomName %>/<%= roomPassword %>  " method="POST">
-
-                <div class="form-group">
-                    <input type="text" class="form-control text-center" name="message"
-                        placeholder="Enter your message..">
-                </div>
-                
-            </form>
             <center>
-                <button onclick="clearBox()" class="btn btn-success send">Send</button>
+                <input id="msgField" type="text" class="form-control text-center" name="message"
+                        placeholder="Enter your message...">
+                <button id="submit" class="btn btn-success send">Send</button>
 
             </center>
-
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
             <script>
                 const msgList = document.getElementById("messagesList");
                 let oldArrayLength = 0;
@@ -85,6 +79,35 @@
                     document.msgForm.submit();
                     document.msgForm.reset();
                 }
+                // ajax
+                $(document).ready(function () {
+                    $("#submit").click(function () {
+                        $.post("/chat/<%= roomName %>/<%= roomPassword %>",
+                            {
+                                message: `${document.getElementById("msgField").value}`
+                                
+                            },
+                            function (data, status) {
+                                console.log(data);
+                            });
+                            document.getElementById("msgField").value = "";
+                    });
+                });
+                // user joined the chat.
+                $(document).ready(function () {
+                    // $("#submit").click(function () {
+                        $.post("/chat/<%= roomName %>/<%= roomPassword %>",
+                            {
+                                message: "Joined the room !"
+                                
+                            },
+                            function (data, status) {
+                                console.log(data);
+                            });
+    
+                    // });
+                });
+
             </script>
 
 
