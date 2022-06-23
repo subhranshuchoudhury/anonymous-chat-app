@@ -63,3 +63,16 @@ h3{
     display: table;
     padding: 10px 70px;
 }
+.send:hover{
+    background-color: red;
+}
+#loading{
+    color: #efef;
+}
+b{
+    color: white;
+}
+i{
+    color: yellow;
+    font-style: normal;
+}

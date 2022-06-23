@@ -182,11 +182,12 @@ app.post("/chat/:roomName/:roomPassword",(req,res)=>{
     if(req.isAuthenticated()){
         const message = req.body.message;
         const username = req.user.username;
-        Room.updateOne({roomname:req.params.roomName,password:req.params.roomPassword},{$push: { messages: `${timestamp()}<br><b style="color:white;">${username}:  ${message}</b>` }},(err)=>{
+        Room.updateOne({roomname:req.params.roomName,password:req.params.roomPassword},{$push: { messages: `${timestamp()}<br><i>[${username}]</i> :- <b>${message}</b>` }},(err)=>{
            if(err){
                res.send(err);
            }else{
-               res.redirect(`/chat/${req.params.roomName}/${req.params.roomPassword}`);
+            //    res.redirect(`/chat/${req.params.roomName}/${req.params.roomPassword}`);
+            
            }
        });
     }else{

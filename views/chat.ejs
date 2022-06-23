@@ -11,20 +11,22 @@
 
             <div id="messageContainer">
                 <p id="messagesList" class="displayMsg">
+                <p id="loading">Messages are loading...</p>
                 </p>
             </div>
 
-            <form action="/chat/<%= roomName %>/<%= roomPassword %>  " method="POST">
+            <form name="msgForm" action="/chat/<%= roomName %>/<%= roomPassword %>  " method="POST">
 
                 <div class="form-group">
                     <input type="text" class="form-control text-center" name="message"
                         placeholder="Enter your message..">
                 </div>
-                <center>
-                    <button type="submit" class="btn btn-success send">Send</button>
-
-                </center>
+                
             </form>
+            <center>
+                <button onclick="clearBox()" class="btn btn-success send">Send</button>
+
+            </center>
 
             <script>
                 const msgList = document.getElementById("messagesList");
@@ -46,6 +48,7 @@
 
                     getPosts()
                         .then(mydata => {
+                            document.getElementById("loading").style.display = "none";
                             if (oldArrayLength < mydata.length) {
                                 removeAllChildNodes(msgList);
                                 mydata.slice().reverse().forEach(element => {
@@ -63,7 +66,7 @@
                 }
                 setInterval(() => {
                     loadData();
-                }, 5000);
+                }, 2000);
 
                 loadData();
 
@@ -77,6 +80,10 @@
                     while (parent.firstChild) {
                         parent.removeChild(parent.firstChild);
                     }
+                }
+                function clearBox() {
+                    document.msgForm.submit();
+                    document.msgForm.reset();
                 }
             </script>
 
