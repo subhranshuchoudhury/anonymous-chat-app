@@ -6,6 +6,8 @@
     overflow-y: scroll;
     margin: 10px;
     border-radius: 23px;
+    display: flex;
+    flex-direction: column-reverse;
     /* overflow-y: hidden; */
     border: 5px solid rgb(0, 0, 0);
 }
