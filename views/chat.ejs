@@ -15,9 +15,12 @@
                 </p>
             </div>
             <center>
-                <input id="msgField" type="text" class="form-control text-center" name="message"
+                <form onsubmit="return false">
+                    <input id="msgField" type="text" class="form-control text-center" name="message"
                         placeholder="Enter your message...">
-                <button id="submit" class="btn btn-success send">Send</button>
+                    <button id="submit" type="submit" class="btn btn-success send">Send</button>
+                </form>
+
 
             </center>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -45,7 +48,7 @@
                             document.getElementById("loading").style.display = "none";
                             if (oldArrayLength < mydata.length) {
                                 removeAllChildNodes(msgList);
-                                mydata.slice().reverse().forEach(element => {
+                                mydata.forEach(element => {
                                     addmessageToList(element);
                                 });
                             } else {
@@ -66,7 +69,7 @@
 
                 function addmessageToList(message) {
                     const msgNode = document.createElement("p");
-                    msgNode.innerHTML = `[*] ${message}`;
+                    msgNode.innerHTML = `🧭 ${message}`;
                     msgList.appendChild(msgNode);
                 }
 
@@ -85,28 +88,26 @@
                         $.post("/chat/<%= roomName %>/<%= roomPassword %>",
                             {
                                 message: `${document.getElementById("msgField").value}`
-                                
+
                             },
                             function (data, status) {
-                                console.log(data);
                             });
-                            document.getElementById("msgField").value = "";
+                        document.getElementById("msgField").value = "";
                     });
                 });
                 // user joined the chat.
                 $(document).ready(function () {
-                    // $("#submit").click(function () {
-                        $.post("/chat/<%= roomName %>/<%= roomPassword %>",
-                            {
-                                message: "Joined the room !"
-                                
-                            },
-                            function (data, status) {
-                                console.log(data);
-                            });
-    
-                    // });
+                    $.post("/chat/<%= roomName %>/<%= roomPassword %>",
+                        {
+                            message: "👋 <i>Joined the room !</i>"
+
+                        },
+                        function (data, status) {
+                        });
+
                 });
+
+
 
             </script>
 
