@@ -16,6 +16,9 @@
 - No deletion of database.
 - Access anywhere any time.
 - "GET" Messages: http://anonymousmsg.herokuapp.com/messages/{room-name}/{room-password}
+- Supports attachments in chat, through HTML elements [Read](https://www.w3schools.com/TAgs/default.asp).
+- eg ```HTML 
+- <img src="https://picsum.photos/200" alt="image">```
 - Create unlimited account to be anonymous.
 - Account passwords are encrypted.
 ## Authentication 🔑:
