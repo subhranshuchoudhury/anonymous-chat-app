@@ -21,6 +21,7 @@
                     <button id="submit" type="submit" class="btn btn-success send">Send</button>
                 </form>
 
+                <b style="color: rgba(77, 74, 74, 0.562);">It supports various <span><a style="text-decoration: none;color: green;" href="https://www.w3schools.com/TAgs/default.asp">HTML ELEMENT</a></span> Tags! eg. img,audio etc.</b>
 
             </center>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -45,14 +46,14 @@
 
                     getPosts()
                         .then(mydata => {
+                            // fetchMSG(mydata);
                             document.getElementById("loading").style.display = "none";
                             if (oldArrayLength < mydata.length) {
+                                oldArrayLength = mydata.length;
                                 removeAllChildNodes(msgList);
                                 mydata.forEach(element => {
                                     addmessageToList(element);
                                 });
-                            } else {
-                                window.oldArrayLength = mydata.length;
                             }
 
                         })
@@ -60,16 +61,22 @@
                             console.log("error.");
 
                         });
+
+                        function fetchMSG(mydata) {
+                            
+                        }
+
+                        
                 }
                 setInterval(() => {
                     loadData();
-                }, 2000);
+                }, 700);
 
                 loadData();
 
                 function addmessageToList(message) {
                     const msgNode = document.createElement("p");
-                    msgNode.innerHTML = `🧭 ${message}`;
+                    msgNode.innerHTML = `🧭 ${message}<hr>`;
                     msgList.appendChild(msgNode);
                 }
 
