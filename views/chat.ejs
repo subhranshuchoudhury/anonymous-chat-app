@@ -21,7 +21,23 @@
                     <button id="submit" type="submit" class="btn btn-success send">Send</button>
                 </form>
 
-                <b style="color: rgba(77, 74, 74, 0.562);">It supports various <span><a style="text-decoration: none;color: green;" href="https://www.w3schools.com/TAgs/default.asp">HTML ELEMENT</a></span> Tags! eg. img,audio etc.</b>
+                <b style="color: rgba(77, 74, 74, 0.562);">It supports various <span><a
+                            style="text-decoration: none;color: green;"
+                            href="https://www.w3schools.com/TAgs/default.asp">HTML ELEMENT</a></span> Tags! eg.
+                    img,audio etc.</b>
+                <p>Please select type of attachment:</p>
+                <form id="radiobtns">
+                    <input type="radio" class="radiobtn" name="attachment" value="">
+                    <label for="text">Text</label>
+                    <input type="radio" class="radiobtn" name="attachment" value='<img  width="320" height="240" src="https://picsum.photos/200" alt="image not loaded.">'>
+                    <label for="image">Image</label>
+                    <input type="radio" class="radiobtn" name="attachment" value='<a href="https://picsum.photos/200" download>Download File</a>'>
+                    <label for="file">File</label>
+                    <input type="radio" class="radiobtn" name="attachment" value='<video width="320" height="240" controls src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"></video>'>
+                    <label for="video">Video</label>
+                    <br><br>
+                    <h6 style="color:bisque">Only change the src="", eg. src="your link"</h6>
+                </form>
 
             </center>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -60,7 +76,13 @@
                         .catch(error => {
                             console.log("error.");
 
-                        });       
+                        });
+
+                    function fetchMSG(mydata) {
+
+                    }
+
+
                 }
                 setInterval(() => {
                     loadData();
@@ -108,6 +130,14 @@
 
                 });
 
+                document.getElementById('radiobtns').onclick = function () {
+                    var radios = document.getElementsByName('attachment');
+                    for (var radio of radios) {
+                        if (radio.checked) {
+                            document.getElementById("msgField").value = radio.value;
+                        }
+                    }
+                }
 
 
             </script>
