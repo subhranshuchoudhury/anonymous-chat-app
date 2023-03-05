@@ -265,6 +265,6 @@ app.get("/messages/:roomName/:roomPassword", (req, res) => {
 
 
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("===> Live at port 3000")
+app.listen(process.env.PORT || 8080, () => {
+    console.log("===> Live at port 8080")
 });

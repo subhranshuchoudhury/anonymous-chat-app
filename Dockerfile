@@ -8,12 +8,13 @@ COPY ["package.json", "package-lock.json*", "./"]
 
 # Install all dependencies
 RUN npm install
+RUN npm ci --only=production
 
 # Copy other files as well
-# COPY.
+COPY . .
 
 # Expose the port
-EXPOSE 5500
+EXPOSE 8080
 
 # Command to execute when the image is instantiated
-CMD [ "node", "server.js" ]
+CMD [ "node", "app.js" ]
